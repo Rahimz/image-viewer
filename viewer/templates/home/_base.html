@@ -7,11 +7,11 @@
         </title>
     </head>
     <body>
-        <div>
-            <a href="#">home</a>
-            <a href="#">images</a>
-            <a href="#">upload image</a>
-            <a href="#">delete image</a>
+        <div style="margin-bottom: 15px; padding:10px; border: solid; border-color: grey; border-width: 0 1 3 6;">
+            <a href="{% url 'viewer:home' %}">home</a>
+            <a href="{% url 'viewer:image_list' %}">images</a>
+            <a href="{% url 'viewer:image_upload' %}">upload image</a>
+            <a href="{% url 'viewer:category_add' %}">Add Category<a>
         </div>
        {% block content %}
          

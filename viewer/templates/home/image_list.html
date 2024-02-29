@@ -1,0 +1,50 @@
+{% extends "home/_base.html" %}
+
+{% load static %}
+
+{% block title %}   
+Image list
+{% endblock title %}
+
+
+{% block content %}
+<table>
+    <thead>
+        <th>
+            <td>#</td>
+            <td>Name</td>
+            <td>Image</td>
+            <td>decription</td>
+            <td>Uploaded at</td>
+            <td></td>
+            <td></td>
+        </th>
+    </thead>
+    <tbody>
+        {% for image in images %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ image.name }}</td>
+            <td>
+                <a href="{% url 'viewer:image_details' image.id %}">
+                    <img src="{{ image.image_file.url }}" alt="" width="50px" height="auto">
+                </a>
+            </td>
+            <td>{{ image.description }}</td>
+            <td>{{ image.upload | date }}</td>
+            <td>
+                <a href="{% url 'viewer:image_edit' image.id %}">
+                    <img src="{% static 'viewer/edit-icon.png' %}" alt="" width="32px" height="auto">
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'viewer:image_remove' image.id %}">
+                    <b>X</b>
+                </a>
+            </td>
+
+        </tr>          
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

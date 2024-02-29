@@ -1,0 +1,18 @@
+{% extends "home/_base.html" %}
+
+
+{% block title %}   
+Image details: {{ image_html_object_name.name }}      
+{% endblock title %}
+
+
+{% block content %}
+
+<img src="{{ image_html_object_name.image_file.url }}" alt="">
+<br>
+<b>{{ image_html_object_name.name }}</b>
+<br>
+<p>
+    {{ image_html_object_name.description }}
+</p>
+{% endblock content %}
