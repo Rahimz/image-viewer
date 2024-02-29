@@ -43,6 +43,9 @@ class Image(models.Model):
         blank=True,
         on_delete=models.SET_NULL
     )
+    like_counts = models.IntegerField(
+        default=0
+    )
 
     def __str__(self):
         return f"{self.name} - {self.upload.date()}"
