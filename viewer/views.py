@@ -4,6 +4,7 @@ from django.http import HttpResponse
 import datetime
 from django.utils import timezone
 import random
+from django.db.models import Q
 
 from viewer.models import Image, Category
 from .forms import ImageForm, CategoryForm
@@ -41,11 +42,31 @@ def About(request):
     )
 
 
-def ImageListView(request):
+def ImageListView(request, category_name=None, sort_field=None):
     images = Image.objects.filter(active=True)
+    filter = None 
+
+    if category_name:
+        category_obj = Category.objects.get(name=category_name)
+        images = images.filter(category=category_obj)
+        filter = category_name
+
+    if sort_field:
+        images = images.order_by(sort_field)
+        
+    search_query = None
+    if request.GET.get('search'):
+        search_query = request.GET.get('search')
+
+        images = Image.objects.filter(active=True).filter(
+            Q(name__icontains=search_query) | Q(category__name__icontains=search_query) | Q(description__icontains=search_query) 
+            )
 
     context = {
-        'images': images
+        'images': images,
+        'filter': filter,
+        'sort_field': sort_field,
+        'query': search_query 
     }
 
     return render(
@@ -106,7 +127,7 @@ def ImageDetailView(request, image_id):
         request,
         'home/image_detials.html',
         {
-            'image_html_object_name': image_from_database 
+            'image': image_from_database 
         }
     )
 
@@ -148,3 +169,9 @@ def AddCategoryView(request):
             'form': form,
         }
     )
+
+def ImageLikeView(request, image_id):
+    image = Image.objects.get(id=image_id)
+    image.like_counts += 1 
+    image.save()
+    return redirect('viewer:image_details', image.id)

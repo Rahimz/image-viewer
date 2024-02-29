@@ -103,20 +103,21 @@ why we use model?
 - (git and github, push code on github)
 - remove an image (soft and hard)
 
-- like an image
-- show like numbers
+- like an image -> done
+- show like numbers -> done
 
 ## work with views
 
-- making filter for list view (by date, category)
-- making sort key for list view (by date, category)
-- making search function
+- making filter for list view (by date, category) -> done
+- making sort key for list view (by date, category) -> done
+- making search function -> done
+- Q function for search -> done
 
 ## working with forms
 
 - making dropdown list for date (validation for date and a bit about validation)
 - grab data from get/post request (with form with cleaned data) search function
-- making complicated query like (date rage, gte, lte, Q , join)
+- making complicated query like (date rage, gte, lte , join)
 
 ## use modules
 
@@ -127,14 +128,14 @@ why we use model?
 - how to extend templates
 - how to include templates
 - template tags : [built-in template tags](https://docs.djangoproject.com/en/4.2/ref/templates/builtins/)
-  - block
+  - block -> done
   - comment (2 type)
-  - extends
+  - extends -> done
   - for and for empty
-  - if
+  - if -> done
   - boolean
   - include
-  - url 
+  - url -> done
 - filters
   - date
   - length
@@ -142,7 +143,7 @@ why we use model?
   - lower / upper
   - time
   - truncatechars / truncatewords
-  - static
+  - static -> done
   
 
 ## Style the html

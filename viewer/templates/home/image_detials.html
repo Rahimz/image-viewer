@@ -1,18 +1,22 @@
 {% extends "home/_base.html" %}
 
+{% load static %}
 
 {% block title %}   
-Image details: {{ image_html_object_name.name }}      
+Image details: {{ image.name }}      
 {% endblock title %}
 
 
 {% block content %}
 
-<img src="{{ image_html_object_name.image_file.url }}" alt="">
+<img src="{{ image.image_file.url }}" alt="" height="600px" width="auto">
 <br>
-<b>{{ image_html_object_name.name }}</b>
+<b>{{ image.name }}</b>
 <br>
+Likes: {{ image.like_counts }} - <a href="{% url 'viewer:image_like' image.id %}">
+    <img src="{% static 'viewer/like.png' %}" alt="" width="32px" height="auto">
+</a>
 <p>
-    {{ image_html_object_name.description }}
+    {{ image.description }}
 </p>
 {% endblock content %}

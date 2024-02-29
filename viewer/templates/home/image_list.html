@@ -8,14 +8,52 @@ Image list
 
 
 {% block content %}
+{% if filter %}
+<div>
+    <p >
+        Images of category: <span style="color:red"><b>{{ filter }}</b></span> <a href="{% url 'viewer:image_list' %}">X</a>
+    </p>
+</div>
+{% endif %}
+
+{% if sort_field %}
+<div>
+    <p >
+        Sorted on: <span style="color:green"><b>{{ sort_field }}</b></span> <a href="{% url 'viewer:image_list' %}">X</a>
+    </p>
+</div>
+{% endif %}
+
+<div>
+    <form action="">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search">
+        <input type="submit" value="Search">
+    </form>
+    {% if query %}
+    Search query: <span style="color:green"><b>{{ query }}</b></span> <a href="{% url 'viewer:image_list' %}">X</a>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+</div>
+
 <table>
     <thead>
         <th>
             <td>#</td>
-            <td>Name</td>
+            <td>
+                <a href="{% url 'viewer:image_list_sort' sort_field='name' %}">Name</a>
+            </td>
             <td>Image</td>
+            <td>
+                <a href="{% url 'viewer:image_list_sort' sort_field='category' %}">Category</a>
+            </td>
             <td>decription</td>
-            <td>Uploaded at</td>
+            <td>
+                <a href="{% url 'viewer:image_list_sort' sort_field='upload' %}">Uploaded at</a>
+                
+            </td>
             <td></td>
             <td></td>
         </th>
@@ -29,6 +67,10 @@ Image list
                 <a href="{% url 'viewer:image_details' image.id %}">
                     <img src="{{ image.image_file.url }}" alt="" width="50px" height="auto">
                 </a>
+            </td>
+            <td>
+                <a href="{% url 'viewer:image_list_category' category_name=image.category.name %}">{{ image.category }}</a>
+                
             </td>
             <td>{{ image.description }}</td>
             <td>{{ image.upload | date }}</td>
