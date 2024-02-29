@@ -42,7 +42,7 @@ def About(request):
 
 
 def ImageListView(request):
-    images = Image.objects.all()
+    images = Image.objects.filter(active=True)
 
     context = {
         'images': images
@@ -113,7 +113,9 @@ def ImageDetailView(request, image_id):
 def ImageRemoveView(request, image_id):
     image_obj = Image.objects.get(id=image_id)
 
-    image_obj.delete()
+    # image_obj.delete()
+    image_obj.active = False
+    image_obj.save()
 
     return redirect ('viewer:image_list')
 
